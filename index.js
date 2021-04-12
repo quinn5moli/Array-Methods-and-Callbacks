@@ -5,16 +5,35 @@ import { fifaData } from './fifa.js';
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Practice accessing data by console.log-ing the following pieces of data note, you may want to filter the data first 😉*/
 
+const final2014 = fifaData.filter(i => {
+    return i["Year"] === 2014 && i["Stage"] === "Final";
+})
+
+console.log(final2014);
+
 //(a) Home Team name for 2014 world cup final
+
+console.log (final2014[0]["Home Team Name"]);
 
 //(b) Away Team name for 2014 world cup final
 
+console.log(final2014[0]["Away Team Name"]);
+
 //(c) Home Team goals for 2014 world cup final
+
+console.log(final2014[0]["Home Team Goals"]);
 
 //(d) Away Team goals for 2014 world cup final
 
+console.log(final2014[0]["Away Team Goals"]);
+
 //(e) Winner of 2014 world cup final */
 
+if (final2014[0]["Home Team Goals"] > final2014[0]["Away Team Goals"]) {
+    console.log(final2014[0]["Home Team Name"])
+} else {
+    console.log(final2014[0]["Away Team Name"])
+}
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use getFinals to do the following:
@@ -24,10 +43,12 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-   /* code here */
+function getFinals(fifaData) {
+  const teamsInFinal =  fifaData.filter(i => {
+        return i.Stage === "Final"  
+    });
+    return teamsInFinal
 }
-
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -36,9 +57,11 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(/* code here */) {
-    /* code here */
+function getYears(getFinals) {
+    const years = getFinals.map(i => {return i.Year})
+    return years;
 }
+
 
 
 
@@ -49,8 +72,16 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(getFinals) {
+    const winners = getFinals.map(i => {
+        if (i["Home Team Goals"] > i["Away Team Goals"]) {
+            return i["Home Team Name"];
+        }
+        else {
+            return i["Away Team Name"];
+        }
+    })
+    return winners;
 }
 
 
